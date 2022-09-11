@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./Navbar";
+import { Routes, Route } from "react-router-dom";
+import Items from "./Items";
+import AddItem from "./AddItem";
+import Cart from "./Cart";
+import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
+import { createStore } from "redux";
+import rootReducer from "./reducers/rootReducer";
+import { Provider } from "react-redux";
 
 function App() {
+  const persistConfig = {
+    key: "root",
+    storage,
+  };
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const store = createStore(persistedReducer);
+  const persistor = persistStore(store);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <h1>Redux E-commerce</h1> */}
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Items />} exact />
+            <Route path="/add-item" element={<AddItem />} exact />
+            <Route path="/cart" element={<Cart />} exact />
+          </Routes>
+        </PersistGate>
+      </Provider>
     </div>
   );
 }
