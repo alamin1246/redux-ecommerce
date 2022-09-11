@@ -52,3 +52,12 @@ h1{
 .img-fluid{
   height: 200px !important;
 }
+
+.form-control{
+  margin-top: 10px ;
+  border-color: black !important;
+}
+.btn-primary{
+  margin-top: 10px;
+  float: left;
+}

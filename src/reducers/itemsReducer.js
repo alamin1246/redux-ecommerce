@@ -40,7 +40,16 @@ const initialData = {
 };
 
 function itemsReducer(state = initialData, action) {
-  return state;
+  switch (action.type) {
+    case "ADD_ITEM":
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+      };
+    default: {
+      return state;
+    }
+  }
 }
 
 export default itemsReducer;
