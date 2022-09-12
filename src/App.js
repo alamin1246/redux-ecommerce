@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
 import { Provider } from "react-redux";
+import Footer from "./Footer";
 
 function App() {
   const persistConfig = {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/add-item" element={<AddItem />} exact />
             <Route path="/cart" element={<Cart />} exact />
           </Routes>
+          <Footer />
         </PersistGate>
       </Provider>
     </div>
